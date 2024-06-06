@@ -1,0 +1,5 @@
+# POSTGRES SQL 
+postgresql://testing-admin:LCrO2_675cDAs11eJugQDw@alpha-goat-4902.7s5.aws-ap-south-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full
+
+# PRISMA
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZmM5NGI5NmUtNzJjYy00YjJmLWFkNmQtMmZkNzJjZWRkODAzIiwidGVuYW50X2lkIjoiNGI2ZmVkZjYyODU1N2VmMzBlNWRlMWU5ZmJiYWQ4ZGZmM2I1YmUwNGE1MTE2ZDA5MDc2OWNlYjU4NjBiMWNkMSIsImludGVybmFsX3NlY3JldCI6IjFjNzNkNjg0LTM1MzgtNDNhOS05NWRiLWNhZDVkYTcyMGQ4MSJ9.ZH98eDt-gfUEkCnt8Qq4laEtRRtExCUynSKpqjJZL0A"
