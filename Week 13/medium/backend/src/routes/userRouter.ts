@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign } from "hono/jwt";
+import { signupInput } from "@developer-crex/common-validation";
 
 const userRouter = new Hono<{
   Bindings: {
@@ -16,6 +17,15 @@ userRouter.post("/signup", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
+
+  const { success } = signupInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Inputs are incorrect",
+    });
+  }
 
   try {
     // check if the email already present or not
@@ -88,6 +98,5 @@ userRouter.post("/signin", async (c) => {
     return c.status(403);
   }
 });
-
 
 export default userRouter;
