@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
+import { blogInput } from "@developer-crex/common-validation";
+
 const blogRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -14,7 +16,6 @@ const blogRouter = new Hono<{
 
 // All blog routes
 
-
 // Todo: Add pagination
 // Get all blogs
 blogRouter.get("/all", async (c) => {
@@ -22,7 +23,19 @@ blogRouter.get("/all", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   try {
-    const allBlogs = await prisma.post.findMany();
+    const allBlogs = await prisma.post.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
+    });
     return c.json({
       allBlogs,
     });
@@ -45,6 +58,17 @@ blogRouter.get("/:id", async (c) => {
       where: {
         id: id,
       },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
     });
     return c.json({
       blog,
@@ -56,7 +80,6 @@ blogRouter.get("/:id", async (c) => {
     });
   }
 });
-
 
 // Middleware
 blogRouter.use("/*", async (c, next) => {
@@ -80,7 +103,6 @@ blogRouter.use("/*", async (c, next) => {
   }
 });
 
-
 // Add a blog
 blogRouter.post("/", async (c) => {
   const prisma = new PrismaClient({
@@ -88,6 +110,15 @@ blogRouter.post("/", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
+
+  const { success } = blogInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Invalid inputs",
+    });
+  }
 
   try {
     const userId = c.get("userId");
@@ -117,17 +148,26 @@ blogRouter.put("/", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const data = await c.req.json();
+  const body = await c.req.json();
+
+  const { success } = blogInput.safeParse(body);
+
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Invalid inputs",
+    });
+  }
 
   try {
     await prisma.post.update({
       where: {
-        id: data.id,
+        id: body.id,
       },
       data: {
-        title: data.title,
-        content: data.content,
-        published: data.published,
+        title: body.title,
+        content: body.content,
+        published: body.published,
       },
     });
 
