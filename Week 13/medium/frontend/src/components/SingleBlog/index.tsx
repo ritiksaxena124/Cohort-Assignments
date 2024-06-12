@@ -15,7 +15,14 @@ interface BlogInfo {
 const SingleBlog = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [blog, setBlog] = useState<BlogInfo>({});
+  const [blog, setBlog] = useState<BlogInfo>({
+    title: "",
+    content: "",
+    author: {
+      firstName: "",
+      lastName: "",
+    },
+  });
 
   useEffect(() => {
     async function getBlogDetails() {
