@@ -1,1 +1,1 @@
-export const Server_URL = "http://127.0.0.1:8787";
+export const Server_URL = "https://backend.app-backend.workers.dev/";
