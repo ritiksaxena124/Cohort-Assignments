@@ -1,1 +1,1 @@
-export const Server_URL = "https://backend.app-backend.workers.dev/";
+export const Server_URL = "https://backend.app-backend.workers.dev";

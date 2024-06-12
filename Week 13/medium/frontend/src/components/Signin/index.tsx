@@ -15,12 +15,15 @@ import { SigninInput } from "@developer-crex/common-validation";
 import axios from "axios";
 import { Server_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
-
+import { authAtom } from "../../store/atoms/authAtom";
+import { useSetRecoilState } from "recoil";
 const Signin = () => {
   const [signinData, setSigninData] = useState<SigninInput>({
     email: "",
     password: "",
   });
+
+  const setAuth = useSetRecoilState(authAtom);
 
   const navigate = useNavigate();
 
@@ -33,6 +36,7 @@ const Signin = () => {
       );
       const jwt = response.data.jwt;
       localStorage.setItem("token", jwt);
+      setAuth(true);
       navigate("/blogs");
     } catch (e) {
       alert("Error signing in");
