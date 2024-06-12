@@ -5,7 +5,10 @@ import { Server_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
-  const [blogContent, setBlogContent] = useState<BlogInput>({});
+  const [blogContent, setBlogContent] = useState<BlogInput>({
+    title: "",
+    content: "",
+  });
 
   const navigate = useNavigate();
 
