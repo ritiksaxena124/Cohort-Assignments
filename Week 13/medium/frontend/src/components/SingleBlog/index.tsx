@@ -2,26 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Server_URL } from "../../config";
-
-interface BlogInfo {
-  title: string;
-  content: string;
-  author: {
-    firstName: string;
-    lastName: string;
-  };
-}
+import { BlogInput } from "@developer-crex/common-validation";
 
 const SingleBlog = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const [blog, setBlog] = useState<BlogInfo>({
+  const [blog, setBlog] = useState<BlogInput>({
     title: "",
     content: "",
-    author: {
-      firstName: "",
-      lastName: "",
-    },
   });
 
   useEffect(() => {
@@ -50,9 +38,9 @@ const SingleBlog = () => {
     <>
       <div className="min-w-80 w-4/5 mx-auto max-w-2xl gap-5 flex flex-col my-24">
         <h1 className="text-3xl font-extrabold">{blog.title}</h1>
-        <p className="text-lg font-medium mb-6 text-slate-500">
+        {/* <p className="text-lg font-medium mb-6 text-slate-500">
           Published by {blog.author?.firstName + " " + blog.author?.lastName}
-        </p>
+        </p> */}
         <p>{blog.content}</p>
       </div>
     </>
