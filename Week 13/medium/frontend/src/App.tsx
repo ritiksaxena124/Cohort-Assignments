@@ -5,6 +5,7 @@ import SigninPage from "./pages/SigninPage";
 import AllBlogsPage from "./pages/AllBlogsPage";
 import BlogPage from "./pages/BlogPage";
 import Navbar from "./components/Navbar";
+import NewBlogPage from "./pages/NewBlogPage";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/blogs" element={<AllBlogsPage />} />
           <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path="/blog/new" element={<NewBlogPage />} />
         </Routes>
       </BrowserRouter>
     </>

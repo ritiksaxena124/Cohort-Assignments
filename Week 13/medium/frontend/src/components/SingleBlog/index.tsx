@@ -41,9 +41,9 @@ const SingleBlog = () => {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto mt-24">
+      <div className="min-w-80 w-4/5 mx-auto max-w-2xl gap-5 flex flex-col my-24">
         <h1 className="text-3xl font-extrabold">{blog.title}</h1>
-        <p className="text-lg font-medium my-6 text-slate-500">
+        <p className="text-lg font-medium mb-6 text-slate-500">
           Published by {blog.author?.firstName + " " + blog.author?.lastName}
         </p>
         <p>{blog.content}</p>

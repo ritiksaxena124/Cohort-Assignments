@@ -104,7 +104,7 @@ const Signup = () => {
             <Button type="submit">Create my account</Button>
           </Form>
           <SignUpBtn>
-            Already have an account? <Link href="/login">Signin &#8599;</Link>
+            Already have an account? <Link href="/signin">Signin &#8599;</Link>
           </SignUpBtn>
         </Container>
       </PageContainer>
