@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { authAtom } from "../../store/atoms/authAtom";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const Navbar = () => {
   const [isAuth, setIsAuth] = useRecoilState(authAtom);
   const navigate = useNavigate();
@@ -18,6 +19,9 @@ const Navbar = () => {
     setIsAuth(false);
     navigate("/signin");
     localStorage.removeItem("token");
+    toast.success("Logout successfull!", {
+      position: "bottom-right"
+    })
   }
 
   function handleSignin() {

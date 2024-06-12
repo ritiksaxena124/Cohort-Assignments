@@ -7,6 +7,7 @@ import BlogPage from "./pages/BlogPage";
 import Navbar from "./components/Navbar";
 import NewBlogPage from "./pages/NewBlogPage";
 import { RecoilRoot } from "recoil";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/blog/:id" element={<BlogPage />} />
             <Route path="/blog/new" element={<NewBlogPage />} />
           </Routes>
+          <Toaster />
         </BrowserRouter>
       </RecoilRoot>
     </>

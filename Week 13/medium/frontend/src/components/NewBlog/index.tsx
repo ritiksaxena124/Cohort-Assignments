@@ -3,6 +3,7 @@ import { BlogInput } from "@developer-crex/common-validation";
 import axios from "axios";
 import { Server_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const NewBlog = () => {
   const [blogContent, setBlogContent] = useState<BlogInput>({
@@ -21,6 +22,9 @@ const NewBlog = () => {
     });
 
     navigate(`/blog/${res.data.blogId}`);
+    toast.success("Blog created successfully", {
+      position: "bottom-right",
+    });
   }
 
   return (

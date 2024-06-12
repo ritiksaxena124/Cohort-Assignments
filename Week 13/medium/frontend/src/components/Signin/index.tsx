@@ -17,6 +17,7 @@ import { Server_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { authAtom } from "../../store/atoms/authAtom";
 import { useSetRecoilState } from "recoil";
+import toast from "react-hot-toast";
 const Signin = () => {
   const [signinData, setSigninData] = useState<SigninInput>({
     email: "",
@@ -38,6 +39,9 @@ const Signin = () => {
       localStorage.setItem("token", jwt);
       setAuth(true);
       navigate("/blogs");
+      toast.success("You are logged in successfully!!", {
+        position: "bottom-right",
+      });
     } catch (e) {
       alert("Error signing in");
     }
