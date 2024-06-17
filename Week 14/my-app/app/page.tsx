@@ -1,5 +1,15 @@
-export default function Home() {
-  return (
-   <h1>Hello World!</h1>
+import axios from "axios";
+
+async function getDetails() {
+  const res = await axios.get(
+    "http://localhost:3000/api/user"
   );
+
+  return res.data;
+}
+
+export default async function Home() {
+
+  const userDetails = await getDetails();
+  return <h1>{userDetails.name}</h1>;
 }
